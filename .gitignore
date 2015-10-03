@@ -1,0 +1,6 @@
+alkokalkulaator.iml
+build/*
+.mvn/*
+.idea/*
+.gradle/*
+war/WEB-INF/classes/*

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+
+    <link href="http://cdn.jsdelivr.net/webjars/bootstrap/3.3.4/css/bootstrap.min.css"
+          th:href="@{/webjars/bootstrap/3.3.4/css/bootstrap.min.css}"
+          rel="stylesheet" media="screen" />
+
+    <script src="http://cdn.jsdelivr.net/webjars/jquery/2.1.4/jquery.min.js"
+            th:src="@{/webjars/jquery/2.1.4/jquery.min.js}"></script>
+
+    <link href="../static/css/guru.css"
+          th:href="@{css/guru.css}" rel="stylesheet" media="screen"/>
+</head>
+<body>
+<div th:replace="fragments/header :: header">
+    <!-- ============================================================================ -->
+    <!-- This content is only used for static prototyping purposes (natural templates)-->
+    <!-- and is therefore entirely optional, as this markup fragment will be included -->
+    <!-- from "fragments/header.html" at runtime.                                     -->
+    <!-- ============================================================================ -->
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="#">Static header</a>
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li class="active"><a href="#">Home</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container">
+    <div class="hero-unit">
+        <h1>Test</h1>
+        <p>
+            Welcome to the Spring MVC Quickstart application!
+            Get started quickly by signing up.
+        </p>
+        <form action="/connect/facebook" method="POST">
+            <input type="hidden" name="scope" value="read_stream" />
+            <div class="formInfo">
+                <p>You aren't connected to Facebook yet. Click the button to connect this application with your Facebook account.</p>
+            </div>
+            <p><button type="submit">Connect to Facebook</button></p>
+        </form>
+
+    </div>
+    <div th:replace="fragments/footer :: footer">&copy; 2013 The Static Templates</div>
+</div>
+...
+</body>
+</html>

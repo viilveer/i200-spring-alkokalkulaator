@@ -1,4 +1,4 @@
-package hello;
+package app.controllers;
 
 import org.springframework.social.facebook.api.Facebook;
 import org.springframework.social.facebook.api.PagedList;
@@ -32,6 +32,6 @@ public class HelloController {
         PagedList<Post> homeFeed = facebook.feedOperations().getHomeFeed();
         model.addAttribute("feed", homeFeed);
 
-        return "hello";
+        return "app";
     }
 }

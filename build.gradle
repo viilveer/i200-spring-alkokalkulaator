@@ -31,6 +31,8 @@ dependencies {
     compile 'org.springframework:spring-aop:4.2.1.RELEASE'
     compile 'org.springframework.boot:spring-boot-starter-thymeleaf'
     compile 'org.springframework.social:spring-social-facebook'
+    compile 'org.springframework.boot:spring-boot-starter-data-jpa'
+    compile 'mysql:mysql-connector-java'
 }
 // end::dependencies[]
 
@@ -45,7 +47,7 @@ buildscript {
 }
 
 
-mainClassName = 'hello.Application'
+mainClassName = 'app.Application'
 
 
 task wrapper(type: Wrapper) {

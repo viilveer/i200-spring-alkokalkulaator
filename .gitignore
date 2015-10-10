@@ -5,4 +5,5 @@ build/
 .gradle/
 war/WEB-INF/classes/*
 gradlew
+src/main/resources/application.properties
 gradlew.bat

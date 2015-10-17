@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head th:replace="fragments/head :: head"></head>
+<body>
+<div th:replace="fragments/header :: header"></div>
+<div class="container">
+    <form class="form-horizontal" th:action="@{/profile}" th:object="${entryForm}" method="post">
+        <div th:class="${#fields.hasErrors('amount')} ? 'form-group has-error' : 'form-group'">
+            <label class="col-xs-2 control-label" for="amount">Alkoholi kogus</label>
+            <div class="col-xs-10">
+                <input type="text" id="amount" th:field="*{amount}" class="form-control" placeholder="Sisesta alkoholi kogus (milliliitrites)"/>
+                <span class="help-block" th:if="${#fields.hasErrors('amount')}" th:errors="*{amount}">Name Error</span>
+            </div>
+        </div>
+        <div th:class="${#fields.hasErrors('relativePercentage')} ? 'form-group has-error' : 'form-group'">
+            <label class="col-xs-2 control-label" for="relativePercentage">Alkoholi sisaldus</label>
+            <div class="col-xs-10">
+                <input type="text" th:field="*{relativePercentage}" id="relativePercentage" class="form-control" placeholder="Sisesta alkoholi sisaldus"/>
+                <span class="help-block" th:if="${#fields.hasErrors('relativePercentage')}" th:errors="*{relativePercentage}">Name Error</span>
+            </div>
+        </div>
+        <div th:class="${#fields.hasErrors('date')} ? 'form-group has-error' : 'form-group'">
+            <label class="col-xs-2 control-label" for="date">Kuupäev</label>
+            <div class="col-xs-10">
+                <input type="date" id="date" th:field="*{date}" class="form-control" placeholder="Sisesta kuupäev"/>
+                <span class="help-block" th:if="${#fields.hasErrors('date')}" th:errors="*{date}">Name Error</span>
+            </div>
+        </div>
+        <input type="submit" class="btn btn-primary pull-right" value="Sisesta"/>
+    </form>
+    <div th:replace="fragments/footer :: footer"></div>
+</div>
+</body>
+</html>

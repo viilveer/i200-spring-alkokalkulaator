@@ -1,7 +1,7 @@
 package app.controllers;
 
-import app.forms.EntryForm;
-import app.repositories.EntryRepository;
+import app.src.forms.EntryForm;
+import app.src.repositories.EntryRepository;
 import app.src.entry.EntrySaver;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.social.facebook.api.Facebook;
@@ -36,8 +36,6 @@ public class ProfileController {
         if (!facebook.isAuthorized()) {
             return "index";
         }
-
-
         return "profile/profile";
     }
 

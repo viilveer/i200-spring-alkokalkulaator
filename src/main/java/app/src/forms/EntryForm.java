@@ -1,4 +1,4 @@
-package app.forms;
+package app.src.forms;
 
 
 import javax.validation.constraints.Max;

@@ -1,8 +1,8 @@
 package app.src.entry;
 
-import app.forms.EntryForm;
+import app.src.forms.EntryForm;
 import app.models.DailyEntry;
-import app.repositories.EntryRepository;
+import app.src.repositories.EntryRepository;
 import app.src.alcohol.AlcoholHelper;
 
 /**

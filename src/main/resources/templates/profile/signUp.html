@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head th:replace="fragments/head :: head"></head>
+<body>
+<div th:replace="fragments/header :: header"></div>
+<div class="container">
+    <form class="form-horizontal" th:action="@{/signup}" th:object="${signupForm}" method="post">
+        <div th:class="${#fields.hasErrors('name')} ? 'form-group has-error' : 'form-group'">
+            <label class="col-xs-2 control-label" for="name">Nimi</label>
+            <div class="col-xs-10">
+                <input type="text" id="name" th:field="*{name}" class="form-control" placeholder="Nimi"/>
+                <span class="help-block" th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Name Error</span>
+            </div>
+        </div>
+        <input type="submit" class="btn btn-primary pull-right" value="Sisesta"/>
+    </form>
+    <div th:replace="fragments/footer :: footer"></div>
+</div>
+</body>
+</html>

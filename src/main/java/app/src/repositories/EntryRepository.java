@@ -1,6 +1,6 @@
-package app.repositories;
+package app.src.repositories;
 
-import app.models.User;
+import app.models.DailyEntry;
 import org.springframework.data.repository.CrudRepository;
 
 import javax.transaction.Transactional;
@@ -9,6 +9,5 @@ import javax.transaction.Transactional;
  * Created by Mihkel on 10.10.2015.
  */
 @Transactional
-public interface UserRepository extends CrudRepository<User, Long> {
-    public User findByEmail(String email);
+public interface EntryRepository extends CrudRepository<DailyEntry, Long> {
 }

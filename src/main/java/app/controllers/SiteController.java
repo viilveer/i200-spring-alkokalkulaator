@@ -1,6 +1,6 @@
 package app.controllers;
 
-import app.repositories.UserRepository;
+import app.src.repositories.user.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -21,7 +21,6 @@ public class SiteController {
 
     @RequestMapping(method= RequestMethod.GET)
     public String index(Model model) {
-        model.addAttribute("user", this.userRepository.findByEmail("mihkel@opus.ee"));
         return "site/index";
     }
 }

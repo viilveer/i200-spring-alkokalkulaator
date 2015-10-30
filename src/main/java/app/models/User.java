@@ -25,7 +25,6 @@ public class User {
     @NotNull
     private String name;
 
-
     // Public methods
 
     public User() { }
@@ -45,5 +44,9 @@ public class User {
 
     public String getEmail() {
         return email;
+    }
+
+    public long getId() {
+        return id;
     }
 }

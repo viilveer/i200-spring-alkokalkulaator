@@ -7,6 +7,7 @@ import javax.validation.Valid;
 import app.src.forms.SignupForm;
 import app.src.repositories.user.UserRepositoryInterface;
 import app.src.social.SocialSignInUtils;
+import app.src.user.factory.UserFactory;
 import app.src.user.exceptions.UserNameAlreadyInUseException;
 import org.springframework.social.connect.Connection;
 import org.springframework.social.connect.ConnectionFactoryLocator;

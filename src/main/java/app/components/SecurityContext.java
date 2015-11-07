@@ -8,12 +8,14 @@ import javax.inject.Inject;
 import javax.sql.DataSource;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 
 @Configuration
 @EnableWebSecurity
@@ -35,7 +37,7 @@ public class SecurityContext extends WebSecurityConfigurerAdapter {
     public void configure(WebSecurity web) throws Exception {
         web
             .ignoring()
-            .antMatchers("/**/*.css", "/**/*.png", "/**/*.gif", "/**/*.jpg");
+            .antMatchers("/**/*.css","/**/*.js", "/**/*.map", "/**/*.png", "/**/*.gif", "/**/*.jpg", "/javax.faces.resource/**");
     }
 
     @Override
@@ -46,13 +48,14 @@ public class SecurityContext extends WebSecurityConfigurerAdapter {
             .loginProcessingUrl("/signin/authenticate")
             .and()
             .logout()
-            .logoutUrl("/signout")
             .deleteCookies("JSESSIONID")
             .and()
             .authorizeRequests()
             .antMatchers("/admin/**", "/favicon.ico", "/resources/**", "/auth/**", "/signin/**", "/signup/**", "/disconnect/facebook", "/").permitAll()
             .antMatchers("/**").authenticated()
             .and()
-            .rememberMe();
+            .rememberMe()
+            .and()
+            .csrf().disable();
     }
 }

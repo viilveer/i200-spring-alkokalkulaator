@@ -3,8 +3,8 @@
 <head>
     <title></title>
 </head>
-<body>
-<div class="navbar navbar-inverse navbar-fixed-top" th:fragment="header">
+<body  th:fragment="header">
+<div class="navbar navbar-inverse navbar-fixed-top">
     <div class="container">
         <div class="navbar-header">
             <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".nav-collapse">
@@ -14,16 +14,24 @@
             </button>
             <a class="navbar-brand" href="#">My project</a>
         </div>
+
         <div class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
-                <li class="active"><a href="/" th:href="@{/}">Home</a></li>
-                <li><a href="/signout" th:href="@{/signout}"><sec:authentication property="principal.username" /></a></li>
+                <li class="active"><a href="/" th:href="@{/}">Avaleht</a></li>
+                <li th:if="${#authorization.expression('isAuthenticated()')}">
+                    <a href="/logout" th:href="@{/logout}"><span sec:authentication="name">Külaline</span></a>
+                </li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
 
             </ul>
         </div>
     </div>
+
 </div>
+<div class="container" th:if="${flashMessage}">
+    <div class="alert alert-success" role="alert" th:text="${flashMessage}"></div>
+</div>
+
 </body>
 </html>

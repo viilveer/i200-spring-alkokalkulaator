@@ -1,27 +1,14 @@
 <!DOCTYPE html>
-<html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
 <head th:replace="fragments/head :: head"></head>
 <body>
 <div th:replace="fragments/header :: header"></div>
-<div class="container">
-    <div class="hero-unit">
-        <h1>Test</h1>
-        <p>
-            Welcome to the Spring MVC Quickstart application!
-            Get started quickly by signing up.
-        </p>
-        <form action="/signin/facebook" method="POST">
-            <input type="hidden" name="scope" value="read_stream" />
-            <input type="hidden" name="_csrf" th:value="${_csrf.token}"/>
-            <div class="formInfo">
-                <p>You aren't connected to Facebook yet. Click the button to connect this application with your Facebook account.</p>
-            </div>
-
-            <p><button type="submit">Connect to Facebook</button></p>
-        </form>
-
-    </div>
-    <div th:replace="fragments/footer :: footer"></div>
+<div class="container" th:if="${#authorization.expression('isAuthenticated()')}">
+    <div th:replace="site/index/logged :: indexLogged"></div>
 </div>
+<div class="container" th:unless="${#authorization.expression('isAuthenticated()')}">
+    <div th:replace="site/index/guest :: indexGuest"></div>
+</div>
+<div th:replace="fragments/footer :: footer"></div>
 </body>
 </html>

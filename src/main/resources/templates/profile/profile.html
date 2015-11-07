@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+
 <head th:replace="fragments/head :: head"></head>
 <body>
 <div th:replace="fragments/header :: header"></div>
@@ -28,7 +29,7 @@
         </div>
         <input type="submit" class="btn btn-primary pull-right" value="Sisesta"/>
     </form>
-    <div th:replace="fragments/footer :: footer"></div>
 </div>
+<div th:replace="fragments/footer :: footer"></div>
 </body>
 </html>

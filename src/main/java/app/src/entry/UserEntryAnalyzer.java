@@ -26,12 +26,16 @@ public class UserEntryAnalyzer {
 
     public long getMissingEntryDays() {
         long days = userAnalyzer.getAccountAgeInDays();
+
+        long applicableDays = days < 7 ? days : 7;
         if (days > 0) {
-            long enteredEntries = entryRepository.countByUserId(userAnalyzer.getUser().getId()); // all must be unique
-            days -= enteredEntries;
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+            String date = LocalDate.now().minusDays(applicableDays).format(formatter);
+            long enteredEntries = entryRepository.countByUserId(userAnalyzer.getUser().getId(), date); // all must be unique
+            applicableDays -= enteredEntries;
         }
 
-        return days;
+        return applicableDays;
     }
 
     public boolean isDayFilled(String date) {

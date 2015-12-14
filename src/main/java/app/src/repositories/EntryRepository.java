@@ -14,7 +14,8 @@ import java.util.List;
 @Transactional
 public interface EntryRepository extends JpaRepository<DailyEntry, Long> {
     List<DailyEntry> findByUserIdOrderByDateAsc(int userId);
-    long countByUserId(int userId);
+    @Query(value = "select count(c.id) from DailyEntry c where c.userId =?1 AND c.date >= ?2")
+    long countByUserId(int userId, String date);
     DailyEntry findByUserIdAndDate(int userId, String date);
 
     @Modifying

@@ -7,7 +7,7 @@ import app.src.forms.EntryForm;
 import app.src.helpers.DateTimeHelper;
 import app.src.repositories.EntryRepository;
 import app.src.repositories.user.UserRepository;
-import app.src.user.UserAnalyzer;
+import app.src.user.Profile;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -21,8 +21,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.inject.Inject;
 import javax.validation.Valid;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.Iterator;
+import java.util.Map;
 
 
 @Controller
@@ -52,33 +53,32 @@ public class ProfileController {
         if (dailyAbsolute != null) {
             model.addAttribute("dailyFeedbackMessage", (new DailyFeedback().toString(dailyAbsolute)));
         }
-
         User user = userRepository.findByEmail(principal.toString());
 
-        UserAnalyzer userAnalyzer = new UserAnalyzer(user);
-        UserEntryAnalyzer userEntryAnalyzer = new UserEntryAnalyzer(userAnalyzer, entryRepository);
-        EntryAnalyzer entryAnalyzer = new EntryAnalyzer(entryRepository);
-
-        long consumption = entryRepository.findLastXDaysAbsoluteAlcoholSum(user.getId(), LocalDate.now().minusDays(30).toString());
-        MonthlyFeedback userMonthlyFeedback = new MonthlyFeedback();
-
-        model.addAttribute("feedbackMessage", userMonthlyFeedback.toString(consumption));
-        model.addAttribute("firstDate", userEntryAnalyzer.getFirstEntryDate().toString());
-        model.addAttribute("filledDates", userEntryAnalyzer.getFilledDates());
-        model.addAttribute("amounts", userEntryAnalyzer.getUserEntryFormatter().getAbsoluteAlcoholEntries());
-        model.addAttribute("entries", userEntryAnalyzer.getUserEntryFormatter().getLastEntries(10));
-        model.addAttribute("dates", userEntryAnalyzer.getUserEntryFormatter().getDates());
-        model.addAttribute("globalAmounts", entryAnalyzer.getField(EntryAnalyzer.ABS_VALUE));
-        model.addAttribute("globalDates", entryAnalyzer.getField(EntryAnalyzer.DATE));
-        model.addAttribute("missingEntryDays", userEntryAnalyzer.getMissingEntryDays());
-        model.addAttribute("isYesterdayFilled", userEntryAnalyzer.isDayFilled(DateTimeHelper.yesterday(LocalDateTime.now())));
+        Profile profile = new Profile(user, entryRepository);
+        Iterator it = profile.getProfileData().entrySet().iterator();
+        while (it.hasNext()) {
+            Map.Entry pair = (Map.Entry)it.next();
+            model.addAttribute(pair.getKey().toString(), pair.getValue());
+            it.remove();
+        }
 
         return "profile/profile";
     }
 
     @RequestMapping(method = RequestMethod.POST)
-    public String profileSubmit(@Valid EntryForm entryForm, BindingResult bindingResult) {
+    public String profileSubmit(@Valid EntryForm entryForm, BindingResult bindingResult, Model model) {
         if (bindingResult.hasErrors()) {
+            Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+            User user = userRepository.findByEmail(principal.toString());
+
+            Profile profile = new Profile(user, entryRepository);
+            Iterator it = profile.getProfileData().entrySet().iterator();
+            while (it.hasNext()) {
+                Map.Entry pair = (Map.Entry)it.next();
+                model.addAttribute(pair.getKey().toString(), pair.getValue());
+                it.remove();
+            }
             return "profile/profile";
         }
 
@@ -92,8 +92,6 @@ public class ProfileController {
             e.getStackTrace();
             return "redirect:/profile?error=Invalid Entry";
         }
-
-
     }
 
     @RequestMapping ("/noAlcoholEntry")

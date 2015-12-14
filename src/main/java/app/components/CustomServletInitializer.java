@@ -1,5 +1,6 @@
 package app.components;
 
+
 import app.Application;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.context.web.SpringBootServletInitializer;

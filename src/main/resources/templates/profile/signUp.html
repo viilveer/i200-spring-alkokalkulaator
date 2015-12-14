@@ -1,21 +1,134 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<html lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <meta name="description" content=""/>
+    <meta name="author" content=""/>
 
-<head th:replace="fragments/head :: head"></head>
+    <title>Minu päevik</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="/css/bootstrap.min.css" rel="stylesheet"/>
+
+    <!-- Custom CSS -->
+    <link href="/css/sb-admin.css" rel="stylesheet"/>
+
+    <!-- Custom Fonts -->
+    <link href="/css/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css"/>
+
+</head>
+
 <body>
-<div th:replace="fragments/header :: header"></div>
-<div class="container">
-    <form class="form-horizontal" th:action="@{/signup}" th:object="${signupForm}" method="post">
-        <div th:class="${#fields.hasErrors('name')} ? 'form-group has-error' : 'form-group'">
-            <label class="col-xs-2 control-label" for="name">Nimi</label>
-            <div class="col-xs-10">
-                <input type="text" id="name" th:field="*{name}" class="form-control" placeholder="Nimi"/>
-                <span class="help-block" th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Name Error</span>
-            </div>
+
+<div id="wrapper">
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/profile">Alkokalkulaator</a>
         </div>
-        <input type="submit" class="btn btn-primary pull-right" value="Sisesta"/>
-    </form>
+        <!-- Top Menu Items -->
+        <ul class="nav navbar-right top-nav">
+
+
+            <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i> <span
+                        sec:authentication="name">Külaline</span> <b class="caret"></b></a>
+                <ul class="dropdown-menu">
+                    <li>
+                        <a href="/logout" th:href="@{/logout}"><i class="fa fa-fw fa-power-off"></i> Logi välja</a>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+
+        <!-- Sidebar Menu Items - These collapse to the responsive navigation menu on small screens -->
+        <div class="collapse navbar-collapse navbar-ex1-collapse">
+            <ul class="nav navbar-nav side-nav">
+                <li class="active">
+                    <a href="/signup"><i class="fa fa-fw fa-dashboard"></i>Minu andmed</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <div id="page-wrapper">
+
+        <div class="container-fluid">
+
+            <!-- Page Heading -->
+            <div class="row">
+                <div class="col-lg-12">
+                    <h1 class="page-header">
+                        Minu päevik
+                        <small>Seadista konto</small>
+                    </h1>
+                    <ol class="breadcrumb">
+                        <li class="active">
+                            <i class="fa fa-dashboard"></i> Minu päevik
+                        </li>
+                    </ol>
+                </div>
+            </div>
+            <!-- /.row -->
+
+            <div class="row">
+                <div class="col-lg-4">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h3 class="panel-title"><i class="fa fa-bar-chart-o fa-fw"></i> Seadista konto</h3>
+                        </div>
+                        <div class="panel-body">
+                            <form class="form-horizontal" th:action="@{/signup}" th:object="${signupForm}"
+                                  method="post">
+                                <div th:class="${#fields.hasErrors('name')} ? 'form-group has-error' : 'form-group'">
+                                    <label class="col-xs-2 control-label" for="name">Nimi</label>
+
+                                    <div class="col-xs-10">
+                                        <input type="text" id="name" th:field="*{name}" class="form-control"
+                                               placeholder="Nimi"/>
+                                        <span class="help-block" th:if="${#fields.hasErrors('name')}"
+                                              th:errors="*{name}">Name Error</span>
+                                    </div>
+                                </div>
+                                <input type="submit" class="btn btn-primary pull-right" value="Sisesta"/>
+                            </form>
+
+                        </div>
+                    </div>
+                </div>
+                <!-- /.row -->
+
+
+                <!-- /.row -->
+
+            </div>
+            <!-- /.container-fluid -->
+
+        </div>
+        <!-- /#page-wrapper -->
+
+    </div>
+    <!-- /#wrapper -->
+
+    <script src="http://cdn.jsdelivr.net/webjars/jquery/2.1.4/jquery.min.js"
+            th:src="@{/webjars/jquery/2.1.4/jquery.min.js}"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="/js/bootstrap.min.js"></script>
+
+
+    <div th:replace="fragments/footer :: footer"></div>
 </div>
-<div th:replace="fragments/footer :: footer"></div>
 </body>
+
 </html>

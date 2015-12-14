@@ -25,6 +25,10 @@ public class User {
     @NotNull
     private String name;
 
+    // The user's name
+    @NotNull
+    private String createdAt;
+
     // Public methods
 
     public User() { }
@@ -33,9 +37,10 @@ public class User {
         this.id = id;
     }
 
-    public User(String email, String name) {
+    public User(String email, String name, String createdAt) {
         this.email = email;
         this.name = name;
+        this.createdAt = createdAt;
     }
 
     public String getName() {
@@ -48,5 +53,9 @@ public class User {
 
     public int getId() {
         return id;
+    }
+
+    public String getCreatedAt() {
+        return createdAt;
     }
 }

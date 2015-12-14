@@ -35,7 +35,6 @@ public class SignupController {
         this.userRepository = userRepository;
 
         this.providerSignInUtils = new ProviderSignInUtils(connectionFactoryLocator, connectionRepository);
-        System.out.println(connectionRepository.getClass());
     }
 
     @RequestMapping(value="/signup", method=RequestMethod.GET)
@@ -51,7 +50,6 @@ public class SignupController {
 
     @RequestMapping(value="/signup", method=RequestMethod.POST)
     public String signup(@Valid SignupForm signupForm, BindingResult formBinding, WebRequest request, Model model) {
-        System.out.println(request.getAttribute(ProviderSignInAttempt.SESSION_ATTRIBUTE, RequestAttributes.SCOPE_SESSION));
         Connection<?> connection = providerSignInUtils.getConnectionFromSession(request);
         if (formBinding.hasErrors()) {
             return "profile/signUp";
@@ -63,7 +61,7 @@ public class SignupController {
                 SocialSignInUtils.signin(signupForm.getEmail());
 
                 providerSignInUtils.doPostSignUp(signupForm.getEmail(), request);
-                return "redirect:/";
+                return "redirect:/profile";
             } catch (UserNameAlreadyInUseException e) {
                 formBinding.rejectValue("username", "user.duplicateUsername", "already in use");
             }

@@ -16,8 +16,9 @@ import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
-import org.springframework.social.security.SocialUserDetailsService;
-import org.springframework.social.security.SpringSocialConfigurer;
+import org.springframework.social.UserIdSource;
+import org.springframework.social.connect.jdbc.JdbcUsersConnectionRepository;
+import org.springframework.social.security.*;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 @Configuration

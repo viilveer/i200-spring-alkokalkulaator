@@ -36,7 +36,7 @@ public class SocialConfig extends SocialConfigurerAdapter {
         System.out.println("begin hack");
         try {
             String[] fieldsToMap = {
-                    "id", "about", "age_range", "address", "bio", "birthday", "context", "cover", "currency", "devices", "education", "email",
+                    "id", "about", "age_range", "bio", "birthday", "context", "cover", "currency", "devices", "education", "email",
                     "favorite_athletes", "favorite_teams", "first_name", "gender", "hometown", "inspirational_people", "installed", "install_type",
                     "is_verified", "languages", "last_name", "link", "locale", "location", "meeting_for", "middle_name", "name", "name_format",
                     "political", "quotes", "payment_pricepoints", "relationship_status", "religion", "security_settings", "significant_other",
